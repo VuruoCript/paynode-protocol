@@ -36,6 +36,11 @@ app.use(cors({
     // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
 
+    // Allow all .onrender.com origins in production
+    if (origin && origin.includes('.onrender.com')) {
+      return callback(null, true);
+    }
+
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified origin.';
       return callback(new Error(msg), false);
