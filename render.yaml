@@ -19,11 +19,11 @@ services:
       - key: RPC_URL
         value: https://bsc-dataseed1.binance.org/
       - key: FACILITATOR_ADDRESS
-        value: "0x6a13D8E56f38e4546e68621e5aC433F2D1deb724"
+        value: "0xD50b956020066e89Da40E3A5ad483765025E8855"
       - key: REWARD_TOKEN_ADDRESS
-        value: "0x15B2b273f6F4413C0dfC70105c44479253f337D0"
+        value: "0x76F982c412c98571BD56751eCEaeCc525E3AA14a"
       - key: PAYMENT_TOKEN_ADDRESS
-        value: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+        value: "0x6Bc79736e31FeD20A19f0eFA1a768E48813f0c9b"
       - key: RELAYER_PRIVATE_KEY
         sync: false
       - key: MIN_RELAYER_BALANCE
@@ -49,8 +49,8 @@ services:
       - key: VITE_CHAIN_ID
         value: "56"
       - key: VITE_FACILITATOR_ADDRESS
-        value: "0x6a13D8E56f38e4546e68621e5aC433F2D1deb724"
+        value: "0xD50b956020066e89Da40E3A5ad483765025E8855"
       - key: VITE_REWARD_TOKEN_ADDRESS
-        value: "0x15B2b273f6F4413C0dfC70105c44479253f337D0"
+        value: "0x76F982c412c98571BD56751eCEaeCc525E3AA14a"
       - key: VITE_PAYMENT_TOKEN_ADDRESS
-        value: "0x55d398326f99059fF775485246999027B3197955"
+        value: "0x6Bc79736e31FeD20A19f0eFA1a768E48813f0c9b"

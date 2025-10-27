@@ -21,13 +21,13 @@ async function main() {
   const usdtAddress = await usdt.getAddress();
   console.log("MockUSDT deployed to:", usdtAddress, "\n");
 
-  // 2. Deploy GaslessReward
-  console.log("Deploying GaslessReward token...");
-  const GaslessReward = await hre.ethers.getContractFactory("GaslessReward");
-  const rewardToken = await GaslessReward.deploy();
+  // 2. Deploy PayNode
+  console.log("Deploying PayNode token...");
+  const PayNode = await hre.ethers.getContractFactory("PayNode");
+  const rewardToken = await PayNode.deploy();
   await rewardToken.waitForDeployment();
   const rewardTokenAddress = await rewardToken.getAddress();
-  console.log("GaslessReward deployed to:", rewardTokenAddress, "\n");
+  console.log("PayNode deployed to:", rewardTokenAddress, "\n");
 
   // 3. Deploy X402Facilitator
   console.log("Deploying X402Facilitator...");
@@ -44,7 +44,7 @@ async function main() {
   console.log("X402Facilitator deployed to:", facilitatorAddress, "\n");
 
   // 4. Transfer ownership
-  console.log("Transferring GaslessReward ownership to Facilitator...");
+  console.log("Transferring PayNode ownership to Facilitator...");
   const tx = await rewardToken.transferOwnership(facilitatorAddress);
   await tx.wait();
   console.log("Ownership transferred successfully!\n");
@@ -68,7 +68,7 @@ async function main() {
     timestamp: new Date().toISOString(),
     contracts: {
       MockUSDT: usdtAddress,
-      GaslessReward: rewardTokenAddress,
+      PayNode: rewardTokenAddress,
       X402Facilitator: facilitatorAddress
     },
     configuration: {
@@ -102,7 +102,7 @@ async function main() {
   console.log();
   console.log("Contracts:");
   console.log("- MockUSDT:", usdtAddress);
-  console.log("- GaslessReward (GRW):", rewardTokenAddress);
+  console.log("- PayNode (PND):", rewardTokenAddress);
   console.log("- X402Facilitator:", facilitatorAddress);
   console.log();
   console.log("Configuration:");

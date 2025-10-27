@@ -4,6 +4,7 @@
  */
 
 import { BrowserProvider, Contract, Signer } from 'ethers';
+import { supportsPermit, isKnownNonPermitToken } from './tokenUtils';
 
 const ERC20_PERMIT_ABI = [
   'function nonces(address owner) view returns (uint256)',
@@ -43,6 +44,26 @@ export async function createPermitSignature({
   chainId,
 }: CreatePermitParams): Promise<PermitSignature> {
   try {
+    // 0. Check if token supports permit
+    // First check if it's a known non-permit token for faster response
+    if (isKnownNonPermitToken(tokenAddress)) {
+      throw new Error(
+        'This token does not support EIP-2612 Permit (gasless approvals). ' +
+        'The token requires a standard approval transaction which costs gas. ' +
+        'Please contact support for alternative payment options or use a different token.'
+      );
+    }
+
+    // For other tokens, check if they support permit
+    const hasPermitSupport = await supportsPermit(tokenAddress, provider);
+    if (!hasPermitSupport) {
+      throw new Error(
+        'This token does not support EIP-2612 Permit (gasless approvals). ' +
+        'The token requires a standard approval transaction which costs gas. ' +
+        'Please contact support for alternative payment options.'
+      );
+    }
+
     // 1. Get the signer from the provider
     const signer: Signer = await provider.getSigner();
 
