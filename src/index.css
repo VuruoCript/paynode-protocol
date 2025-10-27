@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 30% 8%;
+    --foreground: 180 100% 95%;
+
+    --card: 210 25% 12%;
+    --card-foreground: 180 100% 95%;
+
+    --popover: 210 25% 10%;
+    --popover-foreground: 180 100% 95%;
+
+    --primary: 160 100% 55%;
+    --primary-foreground: 210 30% 8%;
+
+    --secondary: 210 20% 18%;
+    --secondary-foreground: 180 100% 95%;
+
+    --muted: 210 20% 20%;
+    --muted-foreground: 180 20% 65%;
+
+    --accent: 160 100% 55%;
+    --accent-foreground: 210 30% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 180 100% 95%;
+
+    --border: 210 20% 20%;
+    --input: 210 20% 20%;
+    --ring: 160 100% 55%;
+
+    --radius: 0.75rem;
+
+    /* Neon effects */
+    --neon-primary: 160 100% 55%;
+    --neon-glow: 160 100% 55%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(160 100% 55% / 0.2), hsl(180 100% 50% / 0.1));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 30% 8%), hsl(210 30% 10%));
+    
+    /* Shadows & Glows */
+    --shadow-neon: 0 0 20px hsl(var(--neon-primary) / 0.5), 0 0 40px hsl(var(--neon-primary) / 0.3);
+    --shadow-neon-strong: 0 0 30px hsl(var(--neon-primary) / 0.7), 0 0 60px hsl(var(--neon-primary) / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Animated background grid */
+  .animated-grid {
+    background-image: 
+      linear-gradient(hsl(160 100% 55% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(160 100% 55% / 0.05) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100px 100px;
+    }
+  }
+
+  /* Code block styling */
+  .code-block {
+    @apply bg-card border border-border rounded-lg p-6 font-mono text-sm;
+    box-shadow: var(--shadow-neon);
+  }
+
+  .code-highlight {
+    @apply text-primary;
+  }
+
+  /* Neon text effect */
+  .neon-text {
+    color: hsl(var(--neon-primary));
+    text-shadow: 
+      0 0 10px hsl(var(--neon-glow) / 0.8),
+      0 0 20px hsl(var(--neon-glow) / 0.6),
+      0 0 30px hsl(var(--neon-glow) / 0.4);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: hsl(var(--neon-primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

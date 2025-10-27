@@ -1,0 +1,29 @@
+{
+  "network": "bsc",
+  "chainId": 56,
+  "deployer": "0xfC186D3AaAe2D6e1A8EE644FE5ce6bDEa043C770",
+  "timestamp": "2025-10-27T04:12:16.239Z",
+  "contracts": {
+    "PayNode": {
+      "address": "0x15B2b273f6F4413C0dfC70105c44479253f337D0",
+      "name": "PayNode",
+      "symbol": "PND"
+    },
+    "X402Facilitator": {
+      "address": "0x6a13D8E56f38e4546e68621e5aC433F2D1deb724",
+      "treasury": "0xfC186D3AaAe2D6e1A8EE644FE5ce6bDEa043C770",
+      "rewardRate": 100,
+      "minPayment": "1000000"
+    },
+    "USDT": {
+      "address": "0x55d398326f99059fF775485246999027B3197955",
+      "name": "Tether USD",
+      "symbol": "USDT"
+    }
+  },
+  "explorerUrls": {
+    "PayNode": "https://bscscan.com/address/0x15B2b273f6F4413C0dfC70105c44479253f337D0",
+    "X402Facilitator": "https://bscscan.com/address/0x6a13D8E56f38e4546e68621e5aC433F2D1deb724",
+    "USDT": "https://bscscan.com/address/0x55d398326f99059fF775485246999027B3197955"
+  }
+}

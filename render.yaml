@@ -1,0 +1,58 @@
+services:
+  # Backend API Service
+  - type: web
+    name: paynode-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: CHAIN_ID
+        value: "56"
+      - key: NETWORK_NAME
+        value: BSC Mainnet
+      - key: RPC_URL
+        value: https://bsc-dataseed1.binance.org/
+      - key: FACILITATOR_ADDRESS
+        value: "0x6a13D8E56f38e4546e68621e5aC433F2D1deb724"
+      - key: REWARD_TOKEN_ADDRESS
+        value: "0x15B2b273f6F4413C0dfC70105c44479253f337D0"
+      - key: PAYMENT_TOKEN_ADDRESS
+        value: "0x55d398326f99059fF775485246999027B3197955"
+      - key: RELAYER_PRIVATE_KEY
+        sync: false
+      - key: MIN_RELAYER_BALANCE
+        value: "0.1"
+    healthCheckPath: /api/payment/health
+
+  # Frontend Service
+  - type: web
+    name: paynode-frontend
+    env: static
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: paynode-backend
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: VITE_CHAIN_ID
+        value: "56"
+      - key: VITE_FACILITATOR_ADDRESS
+        value: "0x6a13D8E56f38e4546e68621e5aC433F2D1deb724"
+      - key: VITE_REWARD_TOKEN_ADDRESS
+        value: "0x15B2b273f6F4413C0dfC70105c44479253f337D0"
+      - key: VITE_PAYMENT_TOKEN_ADDRESS
+        value: "0x55d398326f99059fF775485246999027B3197955"

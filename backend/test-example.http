@@ -1,0 +1,78 @@
+###
+# Gasless Payment API Test Examples
+# Use with VS Code REST Client extension or similar tools
+###
+
+### Variables
+@baseUrl = http://localhost:3000
+@userAddress = 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5
+@txHash = 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+###
+# 1. Root endpoint - Check if server is running
+GET {{baseUrl}}/
+
+###
+# 2. Get payment configuration
+GET {{baseUrl}}/api/payment/config
+
+###
+# 3. Health check - Monitor relayer status
+GET {{baseUrl}}/api/payment/health
+
+###
+# 4. Get user balance
+GET {{baseUrl}}/api/payment/balance/{{userAddress}}
+
+###
+# 5. Calculate reward for payment amount (1 USDT = 1000000 in smallest units)
+GET {{baseUrl}}/api/payment/calculate/1000000
+
+###
+# 6. Get transaction status
+GET {{baseUrl}}/api/payment/status/{{txHash}}
+
+###
+# 7. Execute gasless payment
+POST {{baseUrl}}/api/payment/execute
+Content-Type: application/json
+
+{
+  "userAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5",
+  "paymentTokenAddress": "0x55d398326f99059fF775485246999027B3197955",
+  "paymentAmount": "1000000",
+  "rewardAmount": "5000000000000000000000",
+  "deadline": 1735689600,
+  "signature": {
+    "v": 27,
+    "r": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+    "s": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+  }
+}
+
+###
+# 8. Test rate limiting (send multiple requests quickly)
+GET {{baseUrl}}/api/payment/config
+###
+GET {{baseUrl}}/api/payment/config
+###
+GET {{baseUrl}}/api/payment/config
+###
+GET {{baseUrl}}/api/payment/config
+###
+GET {{baseUrl}}/api/payment/config
+
+###
+# 9. Test invalid address format
+GET {{baseUrl}}/api/payment/balance/invalid-address
+
+###
+# 10. Test missing parameters
+POST {{baseUrl}}/api/payment/execute
+Content-Type: application/json
+
+{
+  "userAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5"
+}
+
+###
