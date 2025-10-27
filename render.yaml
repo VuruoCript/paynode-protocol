@@ -34,7 +34,6 @@ services:
   - type: web
     name: paynode-frontend
     env: static
-    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     routes:
